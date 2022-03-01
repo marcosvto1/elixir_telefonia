@@ -10,9 +10,7 @@ defmodule Assinante do
         |> write(plano) 
         {:ok, "Assiante #{nome} cadastrado com sucesso"}
       _assinante -> {:error, "Assinante com este número cadastro"}
-    end
-
-  
+    end  
   end
 
   def buscar_assinante(numero) do
