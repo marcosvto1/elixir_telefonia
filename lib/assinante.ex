@@ -41,6 +41,21 @@ defmodule Assinante do
     end  
   end
 
+  @doc """
+  Função encontrar o assinante, seja por `pospago`, `prepago` ou por ambas
+
+  ## Parametros da função
+
+  - numero: Número do assinante
+  - key: Tipo de lista, (:all, :prepago, :pospago), caso não informado será considerado :all
+
+  ## Exemplo
+
+      iex> Assinante.cadastrar("Joao", "123", "123")
+      iex> Assinante.buscar_assinante("123")
+      %Assinante{cpf: "123", nome: "Joao", numero: "123", plano: :prepago}
+
+  """
   def buscar_assinante(numero, key \\ :all), do: buscar(numero, key)
 
   defp buscar(numero, :prepago), do: filtro(assinante_prepago(), numero)
