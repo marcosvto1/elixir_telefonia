@@ -49,7 +49,7 @@ defmodule Assinante do
   def atualizar(numero, assinante) do
     {assinante_antigo, nova_lista} = deletar_item(numero)
 
-    case assinante.plano.__struct__ === assinante_antigo.__struct__ do
+    case assinante.plano.__struct__ === assinante_antigo.plano.__struct__ do
       true ->
         (nova_lista ++ [assinante])
         |> :erlang.term_to_binary()
