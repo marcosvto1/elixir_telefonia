@@ -132,7 +132,7 @@ defmodule Assinante do
       {:ok, assinantes} -> 
         assinantes
         |> :erlang.binary_to_term()
-      {:error, :ennoent} -> {:error, "Arquivo inválido"}
+      {:error, :enoent} -> {:error, "Arquivo inválido"}
     end
   end
 end
