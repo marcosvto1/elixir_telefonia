@@ -17,4 +17,8 @@ defmodule Prepago do
       true -> {:error, "Voce nao tem credido para a ligacao, faça uma recarga"}
     end
   end
+
+  def imprimir_conta(mes, ano, numero) do
+    Contas.imprimir(mes, ano, numero, :prepago)
+  end
 end

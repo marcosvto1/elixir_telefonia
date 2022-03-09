@@ -24,4 +24,28 @@ defmodule PrepagoTest do
     end
   end
 
+  describe "Testes para impressao de contas" do
+    test "deve informar valores da conta do mes" do
+      Assinante.cadastrar("Marcos", "123", "123", :prepago)
+
+      data = DateTime.utc_now()
+      data_antiga = ~U[2022-02-01 00:37:30.362220Z]
+      Recarga.nova(data_antiga, 10, "123")
+      Prepago.fazer_chamada("123", data_antiga, 10) 
+
+      Recarga.nova(data, 10, "123")
+      Prepago.fazer_chamada("123", data, 10) 
+      
+      assinante = Assinante.buscar_assinante("123")
+      assert assinante.numero == "123"
+      assert Enum.count(assinante.chamadas) == 2
+      assert Enum.count(assinante.plano.recargas) == 2
+
+      assinante = Prepago.imprimir_conta(data.month, data.year, "123")
+      assert assinante.numero == "123"
+      assert Enum.count(assinante.chamadas) == 1
+      assert Enum.count(assinante.plano.recargas) == 1
+    end
+  end
+
 end
